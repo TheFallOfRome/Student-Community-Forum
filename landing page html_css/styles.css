@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+  background: #fff;
+}
+header {
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  height: 70px;
+}
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 40px;
+}
+.nav-logo {
+  height: 130px;
+  padding-top: 30px;
+}
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 0.7;
+  text-decoration: none;
+  color: #000;
+}
+.nav-link.active {
+  opacity: 1;
+}
+.sign-in-button {
+  background: #2489d3;
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.main-content {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 70px);
+}
+.left-section {
+  flex: 0.45;
+  padding: 80px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.right-section {
+  flex: 0.55;
+  background: #f05023;
+  position: relative;
+  overflow: hidden;
+}
+.welcome-text {
+  font-family: "Outfit", sans-serif;
+  font-size: 75px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+}
+.yellow-squiggle {
+  display: block;
+  margin: 10px 0 30px;
+}
+.subtitle {
+  font-size: 25px;
+  line-height: 1.4;
+  opacity: 0.5;
+  margin-bottom: 40px;
+}
+.cta-buttons {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 50px;
+  padding-left: 190px;
+}
+.sign-in,
+.join-now {
+  width: 200px;
+  height: 60px;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+.sign-in {
+  background: #2489d3;
+  color: #fff;
+}
+.join-now {
+  background: transparent;
+  color: #2489d3;
+  border: 2.5px solid #2489d3;
+}
+.features {
+  display: flex;
+  gap: 90px;
+}
+.feature {
+  text-align: center;
+  padding-left: 40px;
+}
+.feature-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 34px;
+  font-weight: 900;
+  margin-bottom: 8px;
+}
+.feature-title.yellow {
+  color: #f0c932;
+}
+.feature-title.blue {
+  color: #2489d3;
+}
+.feature-title.orange {
+  color: #f05023;
+}
+.feature-desc {
+  font-weight: 700;
+  font-size: 14px;
+}
+.graphics-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.bubble-logo {
+  position: absolute;
+  top: 20%;
+  left: 15%;
+  transform: translate(-50%,-55%);
+  max-width: 350px;
+  width: 80%;
+}
+.texas-logo {
+  position: absolute;
+  top: 22%;
+  left: 12%;
+  width: 825px;
+  height: 625px;
+}
+.mascot {
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 30%;
+  height: 250px;
+}
+.white-circle {
+  position: absolute;
+  top: 24%;
+  left: 26%;
+  width: 525px;
+  height: 525px;
+}
+@media (max-width:991px) {
+  .header-container {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    height: auto;
+  }
+  .main-nav {
+    order: 3;
+    margin: 10px 0;
+  }
+  .sign-in-button {
+    order: 2;
+    margin-left: auto;
+  }
+  .nav-logo {
+    order: 1;
+  }
+  .main-content {
+    flex-direction: column;
+    height: auto;
+  }
+  .left-section,
+  .right-section {
+    flex: 1;
+    padding: 40px 20px;
+  }
+  .welcome-text {
+    font-size: 40px;
+  }
+  .features {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .texas-logo {
+    width: 60%;
+  }
+}
+@media (max-width:640px) {
+  .welcome-text {
+    font-size: 32px;
+  }
+  .sign-in,
+  .join-now {
+    width: 120px;
+    height: 45px;
+    font-size: 14px;
+  }
+  .mascot {
+    max-width: 80px;
+  }
+}
