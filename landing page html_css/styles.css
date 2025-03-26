@@ -298,3 +298,47 @@ header {
   border-radius: 5px;
   cursor: pointer;
 }
+
+
+/* ===== Discussion Boards Styles ===== */
+.discussion-container {
+  padding: 50px 80px;
+  text-align: center;
+}
+
+.discussion-title {
+  font-size: 36px;
+  font-weight: 900;
+  margin-bottom: 30px;
+}
+
+.discussion-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+}
+
+.discussion-card {
+  background: #f0f0f0;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.discussion-card:hover {
+  background: #e0e0e0;
+}
+
+.discussion-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.discussion-card p {
+  font-size: 16px;
+  opacity: 0.7;
+}
