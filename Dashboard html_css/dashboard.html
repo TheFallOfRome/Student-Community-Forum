@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UTRGV Student Community Forum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'Main/css/dashboardstyle.css' %}">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png %}">
+    <nav class="main-nav">
+      <a href="#" class="nav-link active">Home</a>
+      <a href="#" class="nav-link">Discussion Boards</a>
+      <a href="#" class="nav-link">Join Group Chats</a>
+      <a href="#" class="nav-link">AI Help</a>
+    </nav>
+    <div class="user-profile">
+      <img class="avatar" src="{% static 'Main/images/Avatar.png %}">
+      <span class="username">Alyssa</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout-container">
+  <aside class="left-sidebar">
+    <div class="sidebar-menu">
+      <button class="sidebar-btn active">
+        <img class="btn-icon" src="{% static 'Main/images/home-icon.png %}">
+        Home
+      </button>
+      <button class="sidebar-btn">
+        <img class="btn-icon" src="{% static 'Main/images/setting-icon.png %}">
+        Setting
+      </button>
+      <button class="sidebar-btn">
+        <img class="btn-icon" src="{% static 'Main/images/logout-icon.png %}">
+        Log out
+      </button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <section class="ai-banner">
+      <div class="ai-banner-text">
+        <h2>GET HELP 24/7 WITH AI</h2>
+        <p>Get help with any UTRGV related questions</p>
+        <button class="get-help-btn">Get Help</button>
+      </div>
+    </section>
+
+    <section class="recent-discussions">
+      <h3>Recent Discussions <span class="view-all">View all</span></h3>
+      <div class="discussion-cards">
+        <div class="discussion-card">
+          <div class="initial-circle">A</div>
+          <div class="discussion-info">
+            <p class="discussion-title">Study tips for finals week?</p>
+            <p class="discussion-user">Alex Garcia</p>
+          </div>
+        </div>
+        <div class="discussion-card">
+          <div class="initial-circle">M</div>
+          <div class="discussion-info">
+            <p class="discussion-title">Anyone have this professor?</p>
+            <p class="discussion-user">Molly Lozano</p>
+          </div>
+        </div>
+        <div class="discussion-card">
+          <div class="initial-circle">M</div>
+          <div class="discussion-info">
+            <p class="discussion-title">Best professors for CSCI 3333?</p>
+            <p class="discussion-user">Martin White</p>
+          </div>
+        </div>
+        <div class="discussion-card">
+          <div class="initial-circle">D</div>
+          <div class="discussion-info">
+            <p class="discussion-title">What to bring first day of class?</p>
+            <p class="discussion-user">Dan Smith</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="group-chats">
+      <h3>Recently Created Group Chats <span class="view-all">View all</span></h3>
+      <div class="chat-cards">
+        <div class="chat-card">
+          <p>CSCI 3333</p>
+          <div class="chat-avatars">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <span class="plus">+1</span>
+          </div>
+        </div>
+        <div class="chat-card">
+          <p>MATH 2414</p>
+          <div class="chat-avatars">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <span class="plus">+1</span>
+          </div>
+        </div>
+        <div class="chat-card">
+          <p>ARTS 1312</p>
+          <div class="chat-avatars">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png %}">
+            <span class="plus">+1</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="important-dates">
+      <h3>Important Dates <span class="view-all">View all</span></h3>
+      <div class="date-cards">
+        <div class="date-card">
+          <p class="date">March 17</p>
+          <p class="desc">Start of Spring Break</p>
+        </div>
+        <div class="date-card">
+          <p class="date">May 9</p>
+          <p class="desc">Final Exams Start</p>
+        </div>
+        <div class="date-card">
+          <p class="date">May 15th</p>
+          <p class="desc">Spring Classes End</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="right-sidebar">
+    <div class="orgs-section">
+      <h3>Popular Student Organizations</h3>
+      <div class="org-card">
+        <img src="{% static 'Main/images/valle_game_devs.png %}">
+        <p>Valle Game Devs</p>
+      </div>
+      <div class="org-card">
+        <img src="{% static 'Main/images/Women_in_stem.png %}">
+        <p>Women in STEM Programs</p>
+      </div>
+      <div class="org-card">
+        <img src="{% static 'Main/images/frontera_devs.png %}">
+        <p>Frontera Devs</p>
+      </div>
+    </div>
+    <div class="discussions-section">
+      <h3>Popular Discussions</h3>
+      <div class="discussion-preview">Does anyone recommend this Professor?</div>
+      <div class="discussion-preview">Anyone knows how to get in contact with ...</div>
+      <div class="discussion-preview">PSA: STOP WITH THE SCOOTERS</div>
+    </div>
+  </aside>
+</div>
+</body>
+</html>

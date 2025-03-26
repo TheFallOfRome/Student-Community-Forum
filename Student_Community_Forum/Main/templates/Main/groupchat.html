@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>UTRGV Student Community Forum</title>
+  <title>Join Group Chats - UTRGV Student Community</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}"/>
 </head>
@@ -12,64 +12,57 @@
 
 <header>
   <div class="header-container">
-    <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    <img class="nav-logo" src="photos\nav-utrgv.png"/>
     <nav class="main-nav">
-      <a href="home.html" class="nav-link active">Home</a>
+      <a href="home.html" class="nav-link">Home</a>
       <a href="discussion.html" class="nav-link">Discussion Boards</a>
-      <a href="groupchat.html" class="nav-link">Join Group Chats</a>
+      <a href="groupchat.html" class="nav-link active">Join Group Chats</a>
       <a href="#" class="nav-link">AI Help</a>
     </nav>
-    <button class="sign-in-button" onclick="window.location.href='Main/signin.html'">Sign In</button>
+    <button class="sign-in-button" onclick="window.location.href='signin.html'">Sign In</button>
   </div>
 </header>
 
 <div class="main-content">
   <section class="left-section">
     <h1 class="welcome-text">
-      Welcome to the UTRGV Student Community Forum!
+      Explore Course Group Chats!
     </h1>
-    
     <svg class="yellow-squiggle" width="218" height="22" viewBox="0 0 218 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3 19.0369C44.7146 4.27994 103.5 2.70991 128.5 3.03692C159.5 3.44241 193 8.03696 215 12.9149" stroke="#F0C932" stroke-width="5" stroke-linecap="round"></path>
     </svg>
-    
     <p class="subtitle">
-      <b>Your</b> hub for campus discussions, group chats, and quick AI-powered help!
+      Find your class group chat in the list below and join!
     </p>
-    <div class="cta-buttons">
-      <button class="sign-in">Sign In</button>
-      <button class="join-now">Join Now</button>
-    </div>
-    <div class="features">
-      <article class="feature">
-        <h2 class="feature-title yellow">Resources</h2>
-        <p class="feature-desc">Find campus help easily</p>
+    
+    <div class="group-chat-list">
+      <article class="group-chat">
+        <h2>Erik Enriquez Senior Project Group Chat</h2>
+        <p>Join other students and professors in Senior Project for discussions and updates.</p>
+        <a href="#" class="join-chat-button">Join</a>
       </article>
-      <article class="feature">
-        <h2 class="feature-title blue">Community</h2>
-        <p class="feature-desc">Verified students</p>
+      <article class="group-chat">
+        <h2>Robert Schweller CSCI 3333 Group Chat</h2>
+        <p>Stay connected with CSCI 3333 students and share resources.</p>
+        <a href="#" class="join-chat-button">Join</a>
       </article>
-      <article class="feature">
-        <h2 class="feature-title orange">Support</h2>
-        <p class="feature-desc">AI Instant Help</p>
+      <article class="group-chat">
+        <h2>Carlos Caballero Computer Science II Group Chat</h2>
+        <p>Discuss coursework and stay updated with Comp Sci 2 members.</p>
+        <a href="#" class="join-chat-button">Join</a>
       </article>
     </div>
   </section>
 
   <section class="right-section">
     <div class="graphics-container">
-      <img class="white-circle" src="{% static 'Main/images\white-circle.png' %}"/>
+      <img class="white-circle" src="{% static 'Main/images/white-circle.png' %}"/>
       <img class="bubble-logo" src="{% static 'Main/images\message-bubble.png' %}"/>
       <img class="texas-logo" src="{% static 'Main/images\utrgv-texas.png' %}"/>
       <img class="mascot" src="{% static 'Main/images\mascot.png' %}"/>
     </div>
   </section>
-
 </div>
-
-<footer>
-  {% include 'Main/chatbot.html' %}
-</footer>
 
 </body>
 </html>
