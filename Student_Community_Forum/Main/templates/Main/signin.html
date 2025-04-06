@@ -16,11 +16,11 @@
       <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
     </a>
     <nav class="main-nav">
-      <a href="index.html" class="nav-link">Home</a>
-      <a href="discussion.html" class="nav-link">Discussion Boards</a>
-      <a href="groupchat.html" class="nav-link">Join Group Chats</a>
+      <a href="{% url 'index' %}" class="nav-link">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
       <a href="" class="nav-link">AI Help</a>
-      <a href="signin.html" class="nav-link active">Sign In</a>
+      <a href="{% url 'signin' %}" class="nav-link active">Sign In</a>
     </nav>
   </div>
 </header>

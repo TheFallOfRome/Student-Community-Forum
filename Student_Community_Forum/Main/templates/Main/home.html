@@ -14,9 +14,9 @@
   <div class="header-container">
     <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
     <nav class="main-nav">
-      <a href="home.html" class="nav-link active">Home</a>
-      <a href="discussion.html" class="nav-link">Discussion Boards</a>
-      <a href="groupchat.html" class="nav-link">Join Group Chats</a>
+      <a href="{% url 'home' %}" class="nav-link active">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
       <a href="#" class="nav-link">AI Help</a>
     </nav>
     <button class="sign-in-button"
