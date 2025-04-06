@@ -5,8 +5,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('dashboard/', views.dashboard, name='dashboard'),  
+    path('signin/', views.signin_view, name='signin'),
+    path('dashboard/', views.dashboard, name='dashboard'),
     path('discussion/', views.discussion, name='discussion'),
     path('groupchat/', views.groupchat, name='groupchat'),
-    path('signin/', views.signin, name='signin'),
-    ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

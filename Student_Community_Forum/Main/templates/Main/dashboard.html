@@ -6,21 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UTRGV Student Community Forum</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'Main/css/dashboardstyle.css' %}">
+  <link rel="stylesheet" href="{% static 'Main/css/styles-dashboard.css' %}">
 </head>
 <body>
 
 <header>
   <div class="header-container">
-    <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png %}">
+    <a href="{% url 'dashboard' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
     <nav class="main-nav">
-      <a href="#" class="nav-link active">Home</a>
-      <a href="#" class="nav-link">Discussion Boards</a>
-      <a href="#" class="nav-link">Join Group Chats</a>
+      <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
       <a href="#" class="nav-link">AI Help</a>
     </nav>
     <div class="user-profile">
-      <img class="avatar" src="{% static 'Main/images/Avatar.png %}">
+      <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
       <span class="username">Alyssa</span>
     </div>
   </div>
@@ -30,16 +32,17 @@
   <aside class="left-sidebar">
     <div class="sidebar-menu">
       <button class="sidebar-btn active">
-        <img class="btn-icon" src="{% static 'Main/images/home-icon.png %}">
+        <img class="btn-icon" src="{% static 'Main/images/home-icon.png' %}"/>
         Home
       </button>
       <button class="sidebar-btn">
-        <img class="btn-icon" src="{% static 'Main/images/setting-icon.png %}">
+        <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}"/>
         Setting
       </button>
-      <button class="sidebar-btn">
-        <img class="btn-icon" src="{% static 'Main/images/logout-icon.png %}">
-        Log out
+      <button class="sidebar-btn"
+              onclick="window.location.href='{% url 'home' %}'">
+          <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}"/>
+          Log out
       </button>
     </div>
   </aside>
@@ -54,7 +57,11 @@
     </section>
 
     <section class="recent-discussions">
-      <h3>Recent Discussions <span class="view-all">View all</span></h3>
+      <h3>Recent Discussions 
+        <span class="view-all">
+          <a href="{% url 'discussion' %}">View all</a>
+        </span>
+      </h3>
       <div class="discussion-cards">
         <div class="discussion-card">
           <div class="initial-circle">A</div>
@@ -88,29 +95,33 @@
     </section>
 
     <section class="group-chats">
-      <h3>Recently Created Group Chats <span class="view-all">View all</span></h3>
+      <h3>Recent Group Chats 
+        <span class="view-all">
+          <a href="{% url 'groupchat' %}">View all</a>
+        </span>
+      </h3>
       <div class="chat-cards">
         <div class="chat-card">
           <p>CSCI 3333</p>
           <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png %}">
-            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
             <span class="plus">+1</span>
           </div>
         </div>
         <div class="chat-card">
           <p>MATH 2414</p>
           <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png %}">
-            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
             <span class="plus">+1</span>
           </div>
         </div>
         <div class="chat-card">
           <p>ARTS 1312</p>
           <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png %}">
-            <img src="{% static 'Main/images/Avatar.png %}">
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
+            <img src="{% static 'Main/images/Avatar.png' %}"/>
             <span class="plus">+1</span>
           </div>
         </div>
@@ -140,15 +151,15 @@
     <div class="orgs-section">
       <h3>Popular Student Organizations</h3>
       <div class="org-card">
-        <img src="{% static 'Main/images/valle_game_devs.png %}">
+        <img src="{% static 'Main\images\valle_game_devs.png' %}"/>
         <p>Valle Game Devs</p>
       </div>
       <div class="org-card">
-        <img src="{% static 'Main/images/Women_in_stem.png %}">
+        <img src="{% static 'Main\images\Women_in_stem.png' %}"/>
         <p>Women in STEM Programs</p>
       </div>
       <div class="org-card">
-        <img src="{% static 'Main/images/frontera_devs.png %}">
+        <img src="{% static 'Main\images\frontera_devs.png' %}"/>
         <p>Frontera Devs</p>
       </div>
     </div>

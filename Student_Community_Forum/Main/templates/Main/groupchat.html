@@ -6,20 +6,25 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Join Group Chats - UTRGV Student Community</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}"/>
+  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
 <body>
 
 <header>
   <div class="header-container">
-    <img class="nav-logo" src="photos\nav-utrgv.png"/>
+    <a href="{% url 'dashboard' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
     <nav class="main-nav">
-      <a href="home.html" class="nav-link">Home</a>
-      <a href="discussion.html" class="nav-link">Discussion Boards</a>
-      <a href="groupchat.html" class="nav-link active">Join Group Chats</a>
+      <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
       <a href="#" class="nav-link">AI Help</a>
     </nav>
-    <button class="sign-in-button" onclick="window.location.href='signin.html'">Sign In</button>
+    <div class="user-profile">
+      <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
+      <span class="username">Alyssa</span>
+    </div>
   </div>
 </header>
 
@@ -56,13 +61,17 @@
 
   <section class="right-section">
     <div class="graphics-container">
-      <img class="white-circle" src="{% static 'Main/images/white-circle.png' %}"/>
+      <img class="white-circle" src="{% static 'Main/images\white-circle.png' %}"/>
       <img class="bubble-logo" src="{% static 'Main/images\message-bubble.png' %}"/>
       <img class="texas-logo" src="{% static 'Main/images\utrgv-texas.png' %}"/>
       <img class="mascot" src="{% static 'Main/images\mascot.png' %}"/>
     </div>
   </section>
 </div>
+
+<footer>
+  {% include 'Main/chatbot.html' %}
+</footer>
 
 </body>
 </html>

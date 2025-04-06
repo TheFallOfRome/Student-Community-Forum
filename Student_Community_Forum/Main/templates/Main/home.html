@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>UTRGV Student Community Forum</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}"/>
+  <link rel="stylesheet" href="{% static 'Main/css/styles-home.css' %}"/>
 </head>
 <body>
 
@@ -19,7 +19,10 @@
       <a href="groupchat.html" class="nav-link">Join Group Chats</a>
       <a href="#" class="nav-link">AI Help</a>
     </nav>
-    <button class="sign-in-button" onclick="window.location.href='Main/signin.html'">Sign In</button>
+    <button class="sign-in-button"
+            onclick="window.location.href='{% url 'signin' %}'">
+    Sign In
+    </button>
   </div>
 </header>
 
@@ -37,7 +40,9 @@
       <b>Your</b> hub for campus discussions, group chats, and quick AI-powered help!
     </p>
     <div class="cta-buttons">
-      <button class="sign-in">Sign In</button>
+      <button class="sign-in"
+      onclick="window.location.href='{% url 'signin' %}'">
+      Sign In</button>
       <button class="join-now">Join Now</button>
     </div>
     <div class="features">

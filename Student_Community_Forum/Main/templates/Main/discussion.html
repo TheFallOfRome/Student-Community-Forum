@@ -6,19 +6,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Discussion Boards | UTRGV Forum</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}"/>
+  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
 <body>
 
 <header>
   <div class="header-container">
-    <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    <a href="{% url 'dashboard' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
     <nav class="main-nav">
-      <a href="home.html" class="nav-link">Home</a>
-      <a href="groupchat.html" class="nav-link">Join Group Chats</a>
-      <a href="discussion.html" class="nav-link active">Discussion Boards</a>
-      <a href="signin.html" class="nav-link">Sign In</a>
+      <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+      <a href="#" class="nav-link">AI Help</a>
     </nav>
+    <div class="user-profile">
+      <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
+      <span class="username">Alyssa</span>
+    </div>
   </div>
 </header>
 
@@ -51,6 +57,8 @@
     </div>
   </div>
 </div>
-
+<footer>
+  {% include 'Main/chatbot.html' %}
+</footer>
 </body>
 </html>
