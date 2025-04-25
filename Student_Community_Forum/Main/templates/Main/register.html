@@ -27,20 +27,59 @@
 <div class="register-container">
     <div>
             <style>
-                .error-message {
-                    color: red;
-                    font-size: 14px;
-                    margin-top: 10px;
+                
+                .register-container {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  height: calc(100vh - 70px);
+                  text-align: center;
                 }
+
+                .register-container h1 {
+                  font-size: 32px;
+                  margin-bottom: 10px;
+                }
+
+                .register-container p {
+                  font-size: 16px;
+                  opacity: 0.8;
+                  margin-bottom: 10px;
+                }
+
                 .register-form {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    width: 100%;
-                    max-width: 400px;
-                    margin: 0 auto;
+                  display: flex;
+                  flex-direction: column;
+                  gap: 15px;
+                  width: 600px;
                 }
+
+                .register-form input {
+                  padding: 12px;
+                  font-size: 16px;
+                  border: 1px solid #ccc;
+                  border-radius: 5px;
+                  margin-bottom: 15px;
+                }
+
+                .register-form button {
+                  padding: 14px 60px;
+                  background: #2489d3;
+                  color: white;
+                  font-size: 16px;
+                  border: none;
+                  border-radius: 5px;
+                  cursor: pointer;
+                  margin-top: 10px;
+                }
+
+                .error-message {
+                  color: red;
+                  font-size: 14px;
+                  margin-top: 10px;
+                }
+                
             </style>
             {% for message in messages %}
                 <div class="error-message">{{ message }}</div>
@@ -56,8 +95,10 @@
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username" required/>
         <input type="email" name="email" placeholder="Email" required/>
+        <br>
         <input type="password" name="password" placeholder="Password" required/>
         <input type="password" name="confirm_password" placeholder="Confirm Password" required/>
+        <br>
         <button type="submit"
         onclick="window.location.href='{% url 'signin' %}'">
         Register</button>
