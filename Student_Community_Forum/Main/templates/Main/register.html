@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register | UTRGV Forum</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <a href="{% url 'home' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
+    <nav class="main-nav">
+      <a href="{% url 'home' %}" class="nav-link">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+      <a href="{% url 'signin' %}" class="nav-link active">Sign In</a>
+    </nav>
+  </div>
+</header>
+
+<div class="register-container">
+    <div>
+            <style>
+                .error-message {
+                    color: red;
+                    font-size: 14px;
+                    margin-top: 10px;
+                }
+                .register-form {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    max-width: 400px;
+                    margin: 0 auto;
+                }
+            </style>
+            {% for message in messages %}
+                <div class="error-message">{{ message }}</div>
+            {% endfor %}
+    </div>
+    <div class="register-form">
+        <h1>Welcome to UTRGV Forum</h1>
+        <p>Join the community and start discussing!</p>
+        <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+        
+    <h2>Register</h2>
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required/>
+        <input type="email" name="email" placeholder="Email" required/>
+        <input type="password" name="password" placeholder="Password" required/>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required/>
+        <button type="submit"
+        onclick="window.location.href='{% url 'signin' %}'">
+        Register</button>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
