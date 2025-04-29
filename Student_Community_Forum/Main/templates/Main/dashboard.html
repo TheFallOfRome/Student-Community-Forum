@@ -35,10 +35,12 @@
         <img class="btn-icon" src="{% static 'Main/images/home-icon.png' %}"/>
         Home
       </button>
-      <button class="sidebar-btn">
-        <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}"/>
-        Setting
-      </button>
+      <a href="{% url 'settings' %}">  
+        <button class="sidebar-btn">
+          <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}"/>
+          Setting
+        </button>
+      </a> 
       <button class="sidebar-btn"
               onclick="window.location.href='{% url 'home' %}'">
           <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}"/>

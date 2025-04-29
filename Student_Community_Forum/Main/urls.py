@@ -9,5 +9,6 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('discussion/', views.discussion, name='discussion'),
     path('groupchat/', views.groupchat, name='groupchat'),
+    path('settings/', views.settings,name='settings'),
     path('register/', views.register, name='register'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Settings Page</title>
+    <link rel="stylesheet" href="{% static 'Main/css/settings.css' %}" />
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+
+            <a href="{% url 'dashboard' %}">
+                <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}" />
+            </a>
+
+            <nav class="main-nav">
+                <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+                <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+                <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+                <a href="#" class="nav-link">AI Help</a>
+            </nav>
+
+            <div class="user-profile">
+                <img class="avatar" src="{% static 'Main/images/Avatar.png' %}" />
+                <span class="username">Alyssa</span>
+            </div>
+
+        </div>
+    </header>
+    <div class="layout-container">
+        <aside class="left-sidebar">
+            <div class="sidebar-menu">
+                <button class="sidebar-btn active">
+                    <img class="btn-icon" src="{% static 'Main/images/home-icon.png' %}" />
+                    Home
+                </button>
+                <button class="sidebar-btn">
+                    <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}" />
+                    Setting
+                </button>
+                <button class="sidebar-btn" onclick="window.location.href='{% url 'home' %}'">
+                    <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}" />
+                    Log out
+                </button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-info">
+                <div class="user-info">
+                    <img class="settings-avatar" src="{% static 'Main/images/Avatar.png' %}" />
+                    <div class="user-info-text">
+                        <p class="user-name">Alyssa G.</p>
+                        <p class="user-email">alexarawles@gmail.com</p>
+                    </div>
+                </div>
+                <button class="edit-btn">Edit</button>
+            </div>
+
+
+            <div class="middle-section">
+                <div class="info-containers">
+                    <div class="profile-pref">
+                        <div class="text-class">First Name</div>
+                        <input placeholder="Enter First Name" class="text-box-classes">
+                    </div>
+                    <div class="profile-pref">
+                        <div class="text-class">Last Name</div>
+                        <input placeholder="Enter Last Name" class="text-box-classes">
+                    </div>
+                </div>
+
+                <div class="info-containers">
+                    <div class="profile-pref">
+                        <div class="text-class">Gender</div>
+                        <select class="drop-down-class">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="profile-pref">
+                        <div class="text-class">Country</div>
+                        <select class="drop-down-class">
+                            <option value="" disabled selected>Select Country</option>
+                            <option value="United States">United States</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="info-containers">
+                    <div class="profile-pref">
+                        <div class="text-class">Language</div>
+                        <select class="drop-down-class">
+                            <option value="" disabled selected>Preferred Language</option>
+                            <option value="English">English</option>
+                        </select>
+                    </div>
+                    <div class="profile-pref">
+                        <div class="text-class">Short Bio/Current Status</div>
+                        <input placeholder="Enter Bio" class="text-box-classes">
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-section">
+                <div class="email-class">Your Email Address</div>
+                <div class="email-container">
+                    <img class="email-icon" src="{% static 'Main/images/email-icon.png' %}">
+                    <div class="email-txt">alyssa.gila02@utrgv.edu</div>
+                </div>
+                <div class="logout-container">
+                    <button class="logout-btn">Log Out</button>
+                </div>
+            </div>
+
+
+        </main>
+    </div>
+</body>
+
+</html>

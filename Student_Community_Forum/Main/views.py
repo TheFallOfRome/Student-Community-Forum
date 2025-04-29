@@ -19,6 +19,9 @@ def discussion(request):
 def groupchat(request):
     return render(request, 'Main/groupchat.html')
 
+def settings(request):
+    return render(request, 'Main/settings.html')
+
 def register(request):
     if request.method == 'POST':
         username = request.POST.get('username')
