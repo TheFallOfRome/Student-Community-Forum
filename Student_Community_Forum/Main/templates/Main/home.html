@@ -43,7 +43,9 @@
       <button class="sign-in"
       onclick="window.location.href='{% url 'signin' %}'">
       Sign In</button>
-      <button class="join-now">Join Now</button>
+      <a href="{% url 'register' %}">  
+        <button class="join-now">Join Now</button>
+      </a>
     </div>
     <div class="features">
       <article class="feature">

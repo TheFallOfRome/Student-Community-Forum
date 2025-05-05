@@ -41,11 +41,13 @@
           Setting
         </button>
       </a> 
-      <button class="sidebar-btn"
-              onclick="window.location.href='{% url 'home' %}'">
+      <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="sidebar-btn">
           <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}"/>
           Log out
-      </button>
+        </button>
+      </form>
     </div>
   </aside>
 

@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.contrib.auth import logout
 from .models import Profile
 # Create your views here.
 
@@ -8,19 +11,56 @@ def home(request):
     return render(request, 'Main/home.html')
 
 def signin_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            messages.error(request, "Invalid username or password.")
+            return redirect('signin')
+
     return render(request, 'Main/signin.html')
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+@login_required
 def dashboard(request):
     return render(request, 'Main/dashboard.html')
 
+@login_required
 def discussion(request):
     return render(request, 'Main/discussion.html')
 
+@login_required
 def groupchat(request):
     return render(request, 'Main/groupchat.html')
 
+@login_required
 def settings(request):
-    return render(request, 'Main/settings.html')
+    user = request.user
+    profile, created = Profile.objects.get_or_create(user=user)
+
+    if request.method == 'POST':
+
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        user.save()
+
+        profile.bio = request.POST.get('bio')
+        profile.gender = request.POST.get('gender')
+        profile.major = request.POST.get('major')
+        profile.minor = request.POST.get('minor')
+        profile.save()
+
+        messages.success(request, "Profile updated successfully.")
+        return redirect('settings')
+    return render(request, 'Main/settings.html', {'user': user, 'profile': profile})
 
 def register(request):
     if request.method == 'POST':
