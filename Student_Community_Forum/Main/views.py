@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from .models import Profile, Discussion, Comment
+from .models import Profile, Discussion, Comment, Groupchat, Message
 # Create your views here.
 
 def home(request):
@@ -79,7 +79,84 @@ def creatediscussion(request):
 
 @login_required
 def groupchat(request):
-    return render(request, 'Main/groupchat.html')
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    groupchats = Groupchat.objects.all()
+
+
+    return render(request, 'Main/groupchat.html', {'groupchats': groupchats, 'profile': profile, 'user': user})
+
+@login_required
+def create_groupchat(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+
+        if Groupchat.objects.filter(title=title).exists():
+            messages.error(request, "A group chat with this title already exists.")
+            return redirect('create_groupchat')
+
+        if title:
+            groupchat = Groupchat.objects.create(
+                title=title,
+                created_by=user,
+                description=description
+            )
+            groupchat.members.add(user)
+            return redirect('groupchat_room', groupchat_id=groupchat.id)
+    return render(request, 'Main/create_groupchat.html', {'profile': profile, 'user': user})
+
+@login_required
+def join_groupchat(request, groupchat_id):
+    groupchat = get_object_or_404(Groupchat, id=groupchat_id)
+    groupchat.members.add(request.user)
+
+    return redirect('groupchat')
+
+@login_required
+def groupchat_room(request, groupchat_id):
+    user= request.user
+    profile = Profile.objects.get(user=user)
+    groupchat = get_object_or_404(Groupchat, id=groupchat_id)
+    messages = groupchat.messages.all().order_by('timestamp')
+
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Message.objects.create(
+                groupchat=groupchat,
+                sender=request.user,
+                content=content
+            )
+            return redirect('groupchat_room', groupchat_id=groupchat.id)
+
+    return render(request, 'Main/groupchat_room.html', {
+        'profile': profile,
+        'user': user,
+        'groupchat': groupchat,
+        'messages': messages
+    })
+
+@login_required
+def leave_groupchat(request, groupchat_id):
+    groupchat = get_object_or_404(Groupchat, id=groupchat_id)
+    groupchat.members.remove(request.user)
+
+    return redirect('groupchat')
+
+@login_required
+def delete_groupchat(request, groupchat_id):
+    groupchat = get_object_or_404(Groupchat, id=groupchat_id)
+    if request.user == groupchat.created_by:
+        groupchat.delete()
+        messages.success(request, "Group chat deleted successfully.")
+    else:
+        messages.error(request, "You do not have permission to delete this group chat.")
+    return redirect('groupchat')
+
 
 @login_required
 def settings(request):

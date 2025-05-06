@@ -22,8 +22,10 @@
       <a href="#" class="nav-link">AI Help</a>
     </nav>
     <div class="user-profile">
-      <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
-      <span class="username">Alyssa</span>
+      <a href="{% url 'settings' %}">
+      <img class="avatar" src="{{profile.profile_picture.url}}"/>
+      </a> 
+      <span class="username">{{user.username}}</span>
     </div>
   </div>
 </header>

@@ -22,34 +22,60 @@
       <a href="#" class="nav-link">AI Help</a>
     </nav>
     <div class="user-profile">
-      <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
-      <span class="username">Alyssa</span>
+      <a href="{% url 'settings' %}">
+        <img class="avatar" src="{{profile.profile_picture.url}}"/>
+      </a>
+        <span class="username">{{user.username}}</span>
     </div>
   </div>
 </header>
+<br>
 
 <div class="main-content">
   <section class="left-section">
-    <h1 class="welcome-text">
-      Explore Course Group Chats!
-    </h1>
+    <br>
+
     <svg class="yellow-squiggle" width="218" height="22" viewBox="0 0 218 22" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M3 19.0369C44.7146 4.27994 103.5 2.70991 128.5 3.03692C159.5 3.44241 193 8.03696 215 12.9149" stroke="#F0C932" stroke-width="5" stroke-linecap="round"></path>
     </svg>
     <p class="subtitle">
       Find your class group chat in the list below and join!
     </p>
+
+    <a href="{% url 'create_groupchat' %}" class="create-chat-button">Create New Group Chat</a>
     
     <div class="group-chat-list">
-      <article class="group-chat">
-        <h2>Erik Enriquez Senior Project Group Chat</h2>
-        <p>Join other students and professors in Senior Project for discussions and updates.</p>
-        <a href="#" class="join-chat-button">Join</a>
-      </article>
+
+      {% for chat in groupchats %}
+        {% if user in chat.members.all %}
+          <!-- Clickable card for members -->
+          <a href="{% url 'groupchat_room' groupchat_id=chat.id %}" class="group-chat-link">
+          <article class="group-chat">
+            <h2>{{ chat.title }}</h2>
+            <p>{{ chat.description }}</p>
+            <p class="chat-members">Members: {{ chat.members.count }}</p>
+            {% if user in chat.members.all %}
+              <span class="joined-chat-label">Already Joined</span>
+            {% endif %}
+          </article>
+          </a>
+        {% else %}
+          <!-- Non-clickable card with join button -->
+          <article class="group-chat">
+            <h2>{{ chat.title }}</h2>
+            <p>{{ chat.description }}</p>
+            <p class="chat-members">Members: {{ chat.members.count }}</p>
+            <a href="{% url 'join_groupchat' groupchat_id=chat.id %}" class="join-chat-button">Join</a>
+          </article>
+        {% endif %}
+          {% empty %}
+          <p>No group chats available yet.</p>
+      {% endfor %}
+
       <article class="group-chat">
         <h2>Robert Schweller CSCI 3333 Group Chat</h2>
         <p>Stay connected with CSCI 3333 students and share resources.</p>
-        <a href="#" class="join-chat-button">Join</a>
+        
       </article>
       <article class="group-chat">
         <h2>Carlos Caballero Computer Science II Group Chat</h2>

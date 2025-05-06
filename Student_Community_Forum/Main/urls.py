@@ -14,6 +14,13 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('discussion/<int:discussion_id>/', views.discussion_detail, name='discussion_detail'),
     path('discussion/create/', views.creatediscussion, name='creatediscussion'),
+    path('groupchat/join/<int:groupchat_id>/', views.join_groupchat, name='join_groupchat'),
+    path('groupchat/<int:groupchat_id>/', views.groupchat_room, name='groupchat_room'),
+    path('groupchat/create/', views.create_groupchat, name='create_groupchat'),
+    path('groupchat/<int:groupchat_id>/leave/', views.leave_groupchat, name='leave_groupchat'),
+    path('groupchat/<int:groupchat_id>/delete/', views.delete_groupchat, name='delete_groupchat'),
+    path('groupchat/join/<int:groupchat_id>/', views.join_groupchat, name='join_groupchat'),
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

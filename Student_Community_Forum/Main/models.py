@@ -34,3 +34,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.user.username} on {self.discussion.title}"
+    
+class Groupchat(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    members = models.ManyToManyField(User, related_name='groupchats', blank=True)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+    
+class Message(models.Model):
+    groupchat = models.ForeignKey(Groupchat, related_name='messages', on_delete=models.CASCADE)
+    sender = models.ForeignKey(User, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sender.username}: {self.content[:30]}"
+    

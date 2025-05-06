@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Create Group Chat</title>
+</head>
+<div>
+  <style>
+    .error-message {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    
+  </style>
+  {% for message in messages %}
+    <div class="error-message">{{ message }}</div>
+  {% endfor %}
+</div>
+<body>
+  <h1>Create a New Group Chat</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <label for="title">Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label for="description">Description (optional):</label><br>
+    <textarea name="description"></textarea><br><br>
+
+    <button type="submit">Create</button>
+  </form>
+</body>
+</html>
