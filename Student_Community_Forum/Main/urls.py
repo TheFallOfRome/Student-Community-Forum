@@ -12,6 +12,8 @@ urlpatterns = [
     path('settings/', views.settings,name='settings'),
     path('register/', views.register, name='register'),
     path('logout/', views.logout_view, name='logout'),
+    path('discussion/<int:discussion_id>/', views.discussion_detail, name='discussion_detail'),
+    path('discussion/create/', views.creatediscussion, name='creatediscussion'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

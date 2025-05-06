@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ discussion.title }}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+          <a href="{% url 'dashboard' %}">
+            <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+          </a>
+          <nav class="main-nav">
+            <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+            <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+            <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+            <a href="#" class="nav-link">AI Help</a>
+          </nav>
+          <div class="user-profile">
+            <img class="avatar" src="{% static 'Main/images/Avatar.png' %}"/>
+            <span class="username">Alyssa</span>
+          </div>
+        </div>
+      </header>
+
+  <h2>{{ discussion.title }}</h2>
+
+  <div class="comments">
+    {% for comment in comments %}
+      <div class="comment">
+        <strong>{{ comment.user.username }}</strong>:
+        <p>{{ comment.content }}</p>
+      </div>
+    {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <textarea name="content" required></textarea>
+    <button type="submit">Add Comment</button>
+  </form>
+
+  <a href="{% url 'discussion' %}">Back to all discussions</a>
+  <footer>
+    {% include 'Main/chatbot.html' %}
+  </footer>
+</body>
+</html>

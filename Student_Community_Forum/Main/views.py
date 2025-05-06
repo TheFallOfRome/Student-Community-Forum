@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
-from .models import Profile
+from .models import Profile, Discussion, Comment
 # Create your views here.
 
 def home(request):
@@ -31,11 +31,51 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'Main/dashboard.html')
+    recent_discussions = Discussion.objects.all().order_by('-created_at')[:4]  # latest 4
+    return render(request, 'Main/dashboard.html', {'recent_discussions': recent_discussions})
 
+#handles discussions, if none exists automatically creates one that welcomes user to forum
 @login_required
 def discussion(request):
-    return render(request, 'Main/discussion.html')
+    if not Discussion.objects.exists():
+        Discussion.objects.create(title="Welcome to the Forum!", created_by=request.user)
+
+    discussions = Discussion.objects.all()
+    return render(request, 'Main/discussion.html', {'discussions': discussions})
+
+#handles discussion comments and posting comments
+@login_required
+def discussion_detail(request, discussion_id):
+    discussion = get_object_or_404(Discussion, id=discussion_id)
+
+    # Handle new comment submission
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Comment.objects.create(
+                discussion=discussion,
+                user=request.user,
+                content=content
+            )
+            return redirect('discussion_detail', discussion_id=discussion.id)
+
+    # Get all comments for this discussion
+    comments = Comment.objects.filter(discussion=discussion).order_by('-created_at')
+
+    return render(request, 'Main/discussion_detail.html', {
+        'discussion': discussion,
+        'comments': comments
+    })
+
+#handles creating a new discussion
+def creatediscussion(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        if title:
+            Discussion.objects.create(title=title, created_by=request.user)
+            return redirect('discussion')  # after creating, go back to list
+    return render(request, 'Main/creatediscussion.html')
+
 
 @login_required
 def groupchat(request):

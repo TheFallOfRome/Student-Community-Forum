@@ -67,35 +67,19 @@
         </span>
       </h3>
       <div class="discussion-cards">
-        <div class="discussion-card">
-          <div class="initial-circle">A</div>
-          <div class="discussion-info">
-            <p class="discussion-title">Study tips for finals week?</p>
-            <p class="discussion-user">Alex Garcia</p>
-          </div>
-        </div>
-        <div class="discussion-card">
-          <div class="initial-circle">M</div>
-          <div class="discussion-info">
-            <p class="discussion-title">Anyone have this professor?</p>
-            <p class="discussion-user">Molly Lozano</p>
-          </div>
-        </div>
-        <div class="discussion-card">
-          <div class="initial-circle">M</div>
-          <div class="discussion-info">
-            <p class="discussion-title">Best professors for CSCI 3333?</p>
-            <p class="discussion-user">Martin White</p>
-          </div>
-        </div>
-        <div class="discussion-card">
-          <div class="initial-circle">D</div>
-          <div class="discussion-info">
-            <p class="discussion-title">What to bring first day of class?</p>
-            <p class="discussion-user">Dan Smith</p>
-          </div>
-        </div>
+        {% for d in recent_discussions %}
+          <a href="{% url 'discussion_detail' d.pk %}" class="discussion-card">
+            <div class="initial-circle">{{ d.created_by.username|first|upper }}</div>
+            <div class="discussion-info">
+              <p class="discussion-title">{{ d.title }}</p>
+              <p class="discussion-user">{{ d.created_by.username }}</p>
+            </div>
+          </a>
+        {% empty %}
+          <p>No discussions yet.</p>
+        {% endfor %}
       </div>
+      
     </section>
 
     <section class="group-chats">
