@@ -3,9 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Discussion Boards | UTRGV Forum</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
 <body>
@@ -25,10 +25,11 @@
       <a href="{% url 'settings' %}">
         <img class="avatar" src="{{profile.profile_picture.url}}"/>
       </a>
-      <span class="username">{{user.username}}</span>
+        <span class="username">{{user.username}}</span>
     </div>
   </div>
 </header>
+<br>
 
 <div class="discussion-container">
   <h2 class="discussion-title">Discussion Boards</h2>

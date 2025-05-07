@@ -77,11 +77,12 @@ def discussion_detail(request, discussion_id):
             return redirect('discussion_detail', discussion_id=discussion.id)
 
     # Get all comments for this discussion
-    comments = Comment.objects.filter(discussion=discussion).order_by('-created_at')
+    comments = Comment.objects.filter(discussion=discussion).order_by('created_at')
 
     return render(request, 'Main/discussion_detail.html', {
         'discussion': discussion,
-        'comments': comments
+        'comments': comments,
+        'user': request.user,
     })
 
 #handles creating a new discussion

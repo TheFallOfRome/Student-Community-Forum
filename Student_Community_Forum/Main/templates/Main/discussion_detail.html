@@ -1,43 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{{ discussion.title }}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+  <title>Discussion: {{ discussion.title }}</title>
   <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
 
-
+<header>
+    <div class="header-container">
+      <a href="{% url 'dashboard' %}">
+        <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+      </a>
+      <nav class="main-nav">
+        <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+        <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+        <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+        <a href="#" class="nav-link">AI Help</a>
+      </nav>
+      <div class="user-profile">
+        <a href="{% url 'settings' %}">
+          <img class="avatar" src="{{profile.profile_picture.url}}"/>
+        </a> 
+          <span class="username">{{user.username}}</span>
+      </div>
+    </div>
+  </header>
 
 <body>
-<header>
-  <div class="header-container">
-    <a href="{% url 'dashboard' %}">
-      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
-    </a>
-    <nav class="main-nav">
-      <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
-      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
-      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
-      <a href="#" class="nav-link">AI Help</a>
-    </nav>
-    <div class="user-profile">
-      <a href="{% url 'settings' %}">
-      <img class="avatar" src="{{profile.profile_picture.url}}"/>
-      </a> 
-      <span class="username">{{user.username}}</span>
-    </div>
-  </div>
-</header>
-  <h2>{{ discussion.title }}</h2>
+  <h1>Discussion: {{ discussion.title }}</h1>
 
-  <div class="comments">
+  <div id="comment-container" style="overflow-y:auto; max-height: 500px; border: 1px solid #ccc; padding: 10px;">
     {% for comment in comments %}
       <div class="comment">
-        <strong>{{ comment.user.username }}</strong>:
-        <p>{{ comment.content }}</p>
+        <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+        <span class="timestamp">{{ comment.created_at|date:"H:i" }}</span>
       </div>
     {% empty %}
       <p>No comments yet.</p>
@@ -46,13 +42,19 @@
 
   <form method="POST">
     {% csrf_token %}
-    <textarea name="content" required></textarea>
+    <textarea name="content" placeholder="Type your message..." required></textarea>
     <button type="submit">Add Comment</button>
   </form>
 
   <a href="{% url 'discussion' %}">Back to all discussions</a>
-  <footer>
-    {% include 'Main/chatbot.html' %}
-  </footer>
+  
+
+  <script>
+    const chatContainer = document.getElementById('chat-container');
+    chatContainer.scrollTop = chatContainer.scrollHeight;
+</script>  
 </body>
+<footer>
+  {% include 'Main/chatbot.html' %}
+</footer>
 </html>
