@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{ chat.title }} - Chat Room</title>
+  <title>{{ groupchat.title }} - Chat Room</title>
   <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
 
@@ -27,16 +27,9 @@
   </header>
 
 <body>
-  <h1>{{ chat.title }}</h1>
+  <h1>{{ groupchat.title }}</h1>
   <div id="chat-container" style="overflow-y:auto; max-height: 500px; border: 1px solid #ccc; padding: 10px;">
-    {% for message in chat.messages.all %}
-      <div class="chat-message">
-        <strong>{{ message.sender.username }}:</strong> {{ message.content }}
-        <span class="timestamp">{{ message.timestamp|date:"H:i" }}</span>
-      </div>
-    {% empty %}
-      <p>No messages yet.</p>
-    {% endfor %}
+    
     {% for message in messages %}
       <div class="chat-message">
         <strong>{{ message.sender.username }}:</strong> {{ message.content }}
@@ -55,11 +48,12 @@
 
   <a href="{% url 'groupchat' %}">← Back to Groupchats</a>
 
-  
-</body>
 <script>
-    // Scroll to the bottom of the chat container on page load
     const chatContainer = document.getElementById('chat-container');
     chatContainer.scrollTop = chatContainer.scrollHeight;
-</script>
+</script>  
+</body>
+<footer>
+  {% include 'Main/chatbot.html' %}
+</footer>
 </html>

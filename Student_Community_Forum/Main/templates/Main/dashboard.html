@@ -91,33 +91,52 @@
         </span>
       </h3>
       <div class="chat-cards">
+        {% for chat in recent_groupchats %}
+        <a href="{% url 'groupchat_room' chat.id %}" class="chat-card">
         <div class="chat-card">
-          <p>CSCI 3333</p>
+          <p>{{ chat.title }}</p>
           <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <span class="plus">+1</span>
+            {% for member in chat.members.all|slice:":2" %}
+              <img src="{{ member.profile.profile_picture.url }}" alt="{{ member.username }}" class="avatar-icon"/>
+            {% endfor %}
+            {% if chat.members.count >= 2 %}
+              <span class="plus">+{{ chat.members.count|add:"-2" }}</span>
+            {% endif %}
           </div>
-        </div>
-        <div class="chat-card">
-          <p>MATH 2414</p>
-          <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <span class="plus">+1</span>
-          </div>
-        </div>
-        <div class="chat-card">
-          <p>ARTS 1312</p>
-          <div class="chat-avatars">
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <img src="{% static 'Main/images/Avatar.png' %}"/>
-            <span class="plus">+1</span>
-          </div>
-        </div>
+         </div>  
+        </a>
+        {% empty %}
+          <p>No group chats yet.</p>
+        {% endfor %}
       </div>
     </section>
-
+    
+    <section class="recent-comments">
+      <h3>Recent Comments on Discussions 
+        <span class="view-all">
+          <a href="{% url 'discussion' %}">View all</a>
+        </span>
+      </h3>
+      <div class="comment-cards">
+        {% for comment in recent_comments %}
+          <div class="comment-card">
+            <p class="comment-text">“{{ comment.content|truncatewords:12 }}”</p>
+            <p class="comment-meta">
+              by <strong>{{ comment.user.username }}</strong>
+            </p>
+            <p class="comment-discussion">
+              on <a href="{% url 'discussion_detail' comment.discussion.id %}">
+                {{ comment.discussion.title }}
+              </a>
+            </p>
+            <br>
+          </div>
+        {% empty %}
+          <p>No comments available.</p>
+        {% endfor %}
+      </div>
+    </section>
+    <br>
     <section class="important-dates">
       <h3>Important Dates <span class="view-all">View all</span></h3>
       <div class="date-cards">

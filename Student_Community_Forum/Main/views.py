@@ -31,8 +31,25 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    recent_discussions = Discussion.objects.all().order_by('-created_at')[:4]  # latest 4
-    return render(request, 'Main/dashboard.html', {'recent_discussions': recent_discussions})
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    recent_discussions = Discussion.objects.all().order_by('-created_at')[:4]
+    recent_groupchats = Groupchat.objects.all().order_by('-created_at')[:4]
+
+    recent_comments = []
+    for discussion in recent_discussions:
+        latest_comment = Comment.objects.filter(discussion=discussion).order_by('-created_at').first()
+        if latest_comment:
+            recent_comments.append(latest_comment)
+
+
+    return render(request, 'Main/dashboard.html', {
+        'recent_discussions': recent_discussions, 
+        'user': user, 'profile': profile, 
+        'recent_groupchats': recent_groupchats, 
+        'recent_comments': recent_comments
+    })
 
 #handles discussions, if none exists automatically creates one that welcomes user to forum
 @login_required
@@ -68,6 +85,7 @@ def discussion_detail(request, discussion_id):
     })
 
 #handles creating a new discussion
+@login_required
 def creatediscussion(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -140,6 +158,7 @@ def groupchat_room(request, groupchat_id):
         'messages': messages
     })
 
+
 @login_required
 def leave_groupchat(request, groupchat_id):
     groupchat = get_object_or_404(Groupchat, id=groupchat_id)
@@ -168,6 +187,9 @@ def settings(request):
         user.first_name = request.POST.get('first_name')
         user.last_name = request.POST.get('last_name')
         user.save()
+
+        if request.FILES.get('profile_picture'):
+            profile.profile_picture = request.FILES.get('profile_picture')
 
         profile.bio = request.POST.get('bio')
         profile.gender = request.POST.get('gender')

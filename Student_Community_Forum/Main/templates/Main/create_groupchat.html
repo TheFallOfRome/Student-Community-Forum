@@ -3,20 +3,28 @@
 <html>
 <head>
   <title>Create Group Chat</title>
+  <link rel="stylesheet" href="{% static 'Main/css/styles.css' %}">
 </head>
-<div>
-  <style>
-    .error-message {
-      color: red;
-      font-size: 14px;
-      margin-top: 10px;
-    }
-    
-  </style>
-  {% for message in messages %}
-    <div class="error-message">{{ message }}</div>
-  {% endfor %}
-</div>
+
+<header>
+  <div class="header-container">
+    <a href="{% url 'dashboard' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
+    <nav class="main-nav">
+      <a href="{% url 'dashboard' %}" class="nav-link active">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+      <a href="#" class="nav-link">AI Help</a>
+    </nav>
+    <div class="user-profile">
+      <a href="{% url 'settings' %}">
+        <img class="avatar" src="{{profile.profile_picture.url}}"/>
+      </a>
+        <span class="username">{{user.username}}</span>
+    </div>
+  </div>
+</header>
 <body>
   <h1>Create a New Group Chat</h1>
   <form method="POST">
@@ -29,5 +37,7 @@
 
     <button type="submit">Create</button>
   </form>
+  <a href="{% url 'groupchat' %}">← Back to Groupchats</a>
 </body>
+{% include 'Main/chatbot.html' %}
 </html>

@@ -307,3 +307,61 @@ h3 {
 .discussion-preview {
   cursor: pointer;
 }
+
+.chat-avatars {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.avatar-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.plus {
+  background-color: #ccc;
+  border-radius: 50%;
+  padding: 4px 8px;
+  font-size: 0.8em;
+}
+
+.comment-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.comment-card {
+  display: block;
+  text-decoration: none;
+  background-color: #f8f8f8;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.comment-card:hover {
+  background-color: #f0f0f0;
+}
+
+.comment-text {
+  font-size: 1rem;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.comment-meta {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.comment-discussion {
+  font-size: 0.85rem;
+  color: #777;
+}

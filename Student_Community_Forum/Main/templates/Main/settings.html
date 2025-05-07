@@ -33,15 +33,15 @@
     <div class="layout-container">
       <aside class="left-sidebar">
         <div class="sidebar-menu">
-          <button class="sidebar-btn active">
+          <button class="sidebar-btn active" onclick="window.location.href='{% url 'dashboard' %}'">
             <img class="btn-icon" src="{% static 'Main/images/home-icon.png' %}" />
             Home
           </button>
-          <button class="sidebar-btn">
+          <button class="sidebar-btn" onclick="window.location.href='{% url 'settings' %}'">
             <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}" />
             Setting
           </button>
-          <button class="sidebar-btn" onclick="window.location.href='{% url 'home' %}'">
+          <button class="sidebar-btn" onclick="window.location.href='{% url 'logout' %}'">
             <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}" />
             Log out
           </button>
@@ -49,11 +49,14 @@
       </aside>
 
     <main class="main-content">
-      <form method="POST">
+      <form method="POST", enctype="multipart/form-data">
           {% csrf_token %}
           <div class="top-info">
             <div class="user-info">
-              <img class="settings-avatar" src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
+              <img id="profilePreview" class="settings-avatar" src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
+
+              <input type="file" name="profile_picture" accept="image/*" onchange="previewProfileImage(event)" class="file-input">
+
               <div class="user-info-text">
                 <p class="user-name">{{ user.first_name }} {{ user.last_name }}</p>
                 <p class="user-email">{{ user.email }}</p>
@@ -115,5 +118,18 @@
         </form>
       </main>
     </div>
+    <script>
+      function previewProfileImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const output = document.getElementById('profilePreview');
+          output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
+    <footer>
+      {% include 'Main/chatbot.html' %}
+    </footer>
   </body>
 </html>

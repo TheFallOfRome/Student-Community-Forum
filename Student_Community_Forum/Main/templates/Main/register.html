@@ -88,7 +88,7 @@
     <div class="register-form">
         <h1>Welcome to UTRGV Forum</h1>
         <p>Join the community and start discussing!</p>
-        <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+        
         
     <h2>Register</h2>
     <form method="POST" action="{% url 'register' %}">
@@ -103,6 +103,7 @@
         onclick="window.location.href='{% url 'signin' %}'">
         Register</button>
     </form>
+    <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
   </div>
 </div>
 
