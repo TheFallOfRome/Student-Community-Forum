@@ -28,7 +28,6 @@
   }
   .nav-logo {
     height: 130px;
-    padding-top: 30px;
   }
   .main-nav {
     display: flex;
@@ -90,9 +89,10 @@
     cursor: pointer;
   }
   .sidebar-btn .btn-icon {
-    width: 15px;
-    height: 15px;
+    width: 20px;
+    height: 20px;
   }
+
   .sidebar-btn.active {
     background: #EB763C;
     color: #fff;
