@@ -4,7 +4,7 @@
 
   <head>
     <title>Settings Page</title>
-    <link rel="stylesheet" href="{% static 'Main/css/settings.css' %}" />
+    <link rel="stylesheet" href="{% static 'Main/css/settings.css' %}">
   </head>
 
   <body>
@@ -23,10 +23,10 @@
         </nav>
 
         <div class="user-profile">
-          <a href="{% url 'settings' %}">
-          <img class="avatar" src="{{profile.profile_picture.url}}" />
+          <a href="{% url 'view_profile' username=user.username %}" style="display: flex; align-items: center; gap: 10px;">
+            <img class="avatar" src="{{ profile.profile_picture.url }}"/>
+            <span class="username">{{ user.username }}</span>
           </a>
-          <span class="username">{{ user.username }}</span>
         </div>
       </div>
     </header>
@@ -53,16 +53,22 @@
           {% csrf_token %}
           <div class="top-info">
             <div class="user-info">
-              <img id="profilePreview" class="settings-avatar" src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
-
-              <input type="file" name="profile_picture" accept="image/*" onchange="previewProfileImage(event)" class="file-input">
+              <div class="avatar-wrapper">
+                <img id="profilePreview" class="settings-avatar" src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
+                <div class="tooltip" id="uploadTooltip">
+                  <label class="custom-file-label">
+                    Browse
+                    <input type="file" name="profile_picture" accept="image/*" onchange="previewProfileImage(event)" class="hidden-input" />
+                  </label>
+                </div>
+              </div>
 
               <div class="user-info-text">
                 <p class="user-name">{{ user.first_name }} {{ user.last_name }}</p>
                 <p class="user-email">{{ user.email }}</p>
               </div>
             </div>
-            <button class="edit-btn">Edit</button>
+            <button type="button" class="edit-btn" onclick="toggleTooltip()">Edit</button>
           </div>
 
 
@@ -119,6 +125,11 @@
       </main>
     </div>
     <script>
+      function toggleTooltip() {
+        const tooltip = document.getElementById("uploadTooltip");
+        tooltip.style.display = tooltip.style.display === "block" ? "none" : "block";
+      }
+
       function previewProfileImage(event) {
         const reader = new FileReader();
         reader.onload = function () {

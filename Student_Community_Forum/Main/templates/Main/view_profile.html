@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ user.username }}'s Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800;900&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'Main/css/styles-dashboard.css' %}">
+  <link rel="stylesheet" href="{% static 'Main/css/view_profile.css' %}">
+</head>
+<body>
+
+<header>
+  <div class="header-container">
+    <a href="{% url 'dashboard' %}">
+      <img class="nav-logo" src="{% static 'Main/images/nav-utrgv.png' %}"/>
+    </a>
+    <nav class="main-nav">
+      <a href="{% url 'dashboard' %}" class="nav-link">Home</a>
+      <a href="{% url 'discussion' %}" class="nav-link">Discussion Boards</a>
+      <a href="{% url 'groupchat' %}" class="nav-link">Join Group Chats</a>
+      <a href="#" class="nav-link">AI Help</a>
+    </nav>
+    <div class="user-profile">
+      <a href="{% url 'settings' %}">
+        <img class="avatar" src="{{ request.user.profile.profile_picture.url }}" />
+      </a>
+      <span class="username">{{ request.user.username }}</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout-container">
+  <aside class="left-sidebar">
+    <div class="sidebar-menu">
+      <button class="sidebar-btn">
+        <img class="btn-icon" src="{% static 'Main/images/home-icon.png' %}" />
+        Home
+      </button>
+      <a href="{% url 'settings' %}">
+        <button class="sidebar-btn">
+          <img class="btn-icon" src="{% static 'Main/images/setting-icon.png' %}" />
+          Setting
+        </button>
+      </a>
+      <form method="POST" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="sidebar-btn">
+          <img class="btn-icon" src="{% static 'Main/images/logout-icon.png' %}" />
+          Log out
+        </button>
+      </form>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <section class="profile-content">
+        <div class="profile-card">
+          <img class="profile-pic" src="{{ profile.profile_picture.url }}" alt="Profile Picture" />
+          <h2 class="full-name">{{ user.first_name }} {{ user.last_name }}</h2>
+          <p class="bio">{{ profile.bio }}</p>
+      
+          <div class="info-grid">
+            <div class="info-box">
+              <span class="label">Major:</span>
+              <span class="value">{{ profile.major }}</span>
+            </div>
+            <div class="info-box">
+              <span class="label">Minor:</span>
+              <span class="value">{{ profile.minor }}</span>
+            </div>
+            <div class="info-box">
+              <span class="label">Email:</span>
+              <span class="value">{{ user.email }}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+  </main>
+</div>
+
+<footer>
+  {% include 'Main/chatbot.html' %}
+</footer>
+</body>
+</html>

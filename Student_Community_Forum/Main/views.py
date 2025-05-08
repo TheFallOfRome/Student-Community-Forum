@@ -58,12 +58,17 @@ def discussion(request):
         Discussion.objects.create(title="Welcome to the Forum!", created_by=request.user)
 
     discussions = Discussion.objects.all()
-    return render(request, 'Main/discussion.html', {'discussions': discussions})
+    profile, created = Profile.objects.get_or_create(user=request.user)
+    return render(request, 'Main/discussion.html', {
+        'discussions': discussions,
+        'profile': profile
+    })
 
 #handles discussion comments and posting comments
 @login_required
 def discussion_detail(request, discussion_id):
     discussion = get_object_or_404(Discussion, id=discussion_id)
+    profile, created = Profile.objects.get_or_create(user=request.user)
 
     # Handle new comment submission
     if request.method == 'POST':
@@ -79,21 +84,28 @@ def discussion_detail(request, discussion_id):
     # Get all comments for this discussion
     comments = Comment.objects.filter(discussion=discussion).order_by('created_at')
 
+
     return render(request, 'Main/discussion_detail.html', {
         'discussion': discussion,
         'comments': comments,
         'user': request.user,
+        'profile': profile
     })
 
 #handles creating a new discussion
 @login_required
 def creatediscussion(request):
+    profile, created = Profile.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
         title = request.POST.get('title')
         if title:
             Discussion.objects.create(title=title, created_by=request.user)
             return redirect('discussion')  # after creating, go back to list
-    return render(request, 'Main/creatediscussion.html')
+        
+    return render(request, 'Main/creatediscussion.html', {
+    'profile': profile
+    })
 
 
 @login_required
@@ -201,6 +213,14 @@ def settings(request):
         messages.success(request, "Profile updated successfully.")
         return redirect('settings')
     return render(request, 'Main/settings.html', {'user': user, 'profile': profile})
+
+def view_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    profile = get_object_or_404(Profile, user=user)
+    return render(request, 'Main/view_profile.html', {
+        'user': user,
+        'profile': profile
+    })
 
 def register(request):
     if request.method == 'POST':

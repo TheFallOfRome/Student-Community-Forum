@@ -20,6 +20,7 @@ urlpatterns = [
     path('groupchat/<int:groupchat_id>/leave/', views.leave_groupchat, name='leave_groupchat'),
     path('groupchat/<int:groupchat_id>/delete/', views.delete_groupchat, name='delete_groupchat'),
     path('groupchat/join/<int:groupchat_id>/', views.join_groupchat, name='join_groupchat'),
+    path('profile/<str:username>/', views.view_profile, name='view_profile'),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

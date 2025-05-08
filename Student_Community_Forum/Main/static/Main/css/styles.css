@@ -11,6 +11,16 @@ header {
   border-bottom: 1px solid rgba(0,0,0,0.1);
   height: 70px;
 }
+
+a,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header-container {
   display: flex;
   align-items: center;
@@ -358,4 +368,9 @@ header {
 .username {
   font-weight: 700;
 }
+
+.username_r{
+  color: #2489d3;
+}
+
 

@@ -18,10 +18,10 @@
         <a href="#" class="nav-link">AI Help</a>
       </nav>
       <div class="user-profile">
-        <a href="{% url 'settings' %}">
-          <img class="avatar" src="{{profile.profile_picture.url}}"/>
-        </a> 
-          <span class="username">{{user.username}}</span>
+        <a href="{% url 'view_profile' username=user.username %}" style="display: flex; align-items: center; gap: 10px;">
+          <img class="avatar" src="{{ profile.profile_picture.url }}"/>
+          <span class="username">{{ user.username }}</span>
+        </a>
       </div>
     </div>
   </header>
@@ -32,7 +32,11 @@
   <div id="comment-container" style="overflow-y:auto; max-height: 500px; border: 1px solid #ccc; padding: 10px;">
     {% for comment in comments %}
       <div class="comment">
-        <strong>{{ comment.user.username }}:</strong> {{ comment.content }}
+        <strong class = "username_r">
+          <a href="{% url 'view_profile' username=comment.user.username %}">
+            {{ comment.user.username }}
+          </a>:
+        </strong> {{ comment.content }}
         <span class="timestamp">{{ comment.created_at|date:"H:i" }}</span>
       </div>
     {% empty %}

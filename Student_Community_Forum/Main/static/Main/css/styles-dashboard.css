@@ -11,6 +11,16 @@ header {
   height: 70px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
+
+a,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+  text-decoration: none;
+  color: inherit;
+}
+
 .header-container {
   display: flex;
   align-items: center;
@@ -365,3 +375,4 @@ h3 {
   font-size: 0.85rem;
   color: #777;
 }
+
