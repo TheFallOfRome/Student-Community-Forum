@@ -1,0 +1,77 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #fafafa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .profile-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.08);
+    width: 800px;
+    text-align: center;
+  }
+  
+  .profile-container h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .profile-container p {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 30px;
+  }
+  
+  .profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  
+  .field-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  .field-group input {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 15px;
+  }
+  
+  .field-group.full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .submit-btn {
+    background-color: rgba(51, 255, 0, 0.095);
+    color: rgb(13, 158, 0);
+    border: none;
+    border-radius: 10px;
+    padding: 14px 90px;
+    font-size: 17px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color: rgba(51, 255, 0, 0.2);
+  }
+  

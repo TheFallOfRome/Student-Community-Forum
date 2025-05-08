@@ -79,7 +79,9 @@
                   font-size: 14px;
                   margin-top: 10px;
                 }
-                
+                .signin-txt{
+                  color: #2489d3;
+                }
             </style>
             {% for message in messages %}
                 <div class="error-message">{{ message }}</div>
@@ -103,7 +105,7 @@
         onclick="window.location.href='{% url 'signin' %}'">
         Register</button>
     </form>
-    <p>Already have an account? <a href="{% url 'signin' %}">Sign In</a></p>
+    <p>Already have an account? <span class = "signin-txt"><a href="{% url 'signin' %}">Sign In</a></span></p>
   </div>
 </div>
 

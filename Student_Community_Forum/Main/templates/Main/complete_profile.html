@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Profile</title>
+  <link rel="stylesheet" href="{% static 'Main/css/complete_profile.css' %}">
+</head>
+<body>
+
+  <div class="profile-container">
+    <h1>Welcome, {{ user.username }}!</h1>
+    <p>Just one more step — tell us a bit more about you.</p>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div class="profile-grid">
+        <div class="field-group">
+          <label for="first_name">First Name</label>
+          <input type="text" name="first_name" value="{{ user.first_name }}" required>
+        </div>
+        <div class="field-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" name="last_name" value="{{ user.last_name }}" required>
+        </div>
+        <div class="field-group">
+          <label for="major">Major</label>
+          <input type="text" name="major" value="{{ profile.major }}" required>
+        </div>
+        <div class="field-group">
+          <label for="minor">Minor (optional)</label>
+          <input type="text" name="minor" value="{{ profile.minor }}">
+        </div>
+        <div class="field-group full-width">
+          <label for="bio">Short Bio / Current Status</label>
+          <input type="text" name="bio" value="{{ profile.bio }}">
+        </div>
+      </div>
+      <button type="submit" class="submit-btn">Finish Setup</button>
+    </form>
+  </div>
+
+</body>
+</html>

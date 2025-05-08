@@ -230,35 +230,60 @@ def register(request):
         confirm_password = request.POST.get('confirm_password')
 
         if password == confirm_password:
-           if User.objects.filter(email=email).exists():
+            if User.objects.filter(email=email).exists():
                 messages.error(request, 'Email already exists.')
                 return redirect('register')
-           elif User.objects.filter(username=username).exists():
+            elif User.objects.filter(username=username).exists():
                 messages.error(request, 'Username already exists.')
                 return redirect('register')
-           elif len(username) < 4:
+            elif len(username) < 4:
                 messages.error(request, 'Username must be at least 5 characters long.')
                 return redirect('register')
-           elif len(password) < 8:
+            elif len(password) < 8:
                 messages.error(request, 'Password must be at least 8 characters long.')
                 return redirect('register')
-           elif not any(char.isdigit() for char in password):
+            elif not any(char.isdigit() for char in password):
                 messages.error(request, 'Password must contain at least one digit.')
                 return redirect('register')
-           else:
+            else:
                 user = User.objects.create_user(username=username, password=password, email=email)
                 user.save()
 
                 user_model = User.objects.get(username=username)
                 new_profile = Profile.objects.create(user=user_model, id_user=user_model.id)
                 new_profile.save()
-                messages.success(request, 'Registration successful! You can now log in.')
-                return redirect('signin')
+
+                login(request, user)
+
+                request.session['new_user_id'] = user_model.id
+
+
+                return redirect('complete_profile')
         else:
             messages.error(request, 'Passwords do not match.')
             return redirect('register')
-      
-        return render(request, 'Main/register_success.html', {'username': username})
-    
-    else:
-        return render(request, 'Main/register.html')
+
+    return render(request, 'Main/register.html')
+
+def complete_profile(request):
+    user_id = request.session.get('new_user_id')
+    if not user_id:
+        return redirect('signin')  # fallback
+
+    user = get_object_or_404(User, id=user_id)
+    profile = Profile.objects.get(user=user)
+
+    if request.method == 'POST':
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        profile.major = request.POST.get('major')
+        profile.bio = request.POST.get('bio')
+        user.save()
+        profile.save()
+
+        # Now log the user in
+        login(request, user)
+        del request.session['new_user_id']
+        return redirect('dashboard')
+
+    return render(request, 'Main/complete_profile.html', {'user': user, 'profile': profile})
